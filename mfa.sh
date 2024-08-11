@@ -1,8 +1,10 @@
 #!/usr/bin/sh
 
 mfa () {
-  printf "%s" "$(2fa ${1})" | tee /dev/tty | pbcopy 
-  printf "\n"
+  local output="$(2fa ${1})"
+  printf "%s" "$output" | pbcopy
+  # don't write to /dev/tty
+  echo "$output"
 }
 
 _mfa () {
